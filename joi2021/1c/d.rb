@@ -1,0 +1,1 @@
+gets.split.tap{b=*1..(_1.to_i);_2.to_i.times{gets.split.tap{|x,y|b[x.to_i-1]=y.to_i}};puts b}

@@ -1,0 +1,1 @@
+[gets,gets][1].chars.each_cons(2){puts _1 if _2==?J}

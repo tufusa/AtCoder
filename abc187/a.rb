@@ -1,0 +1,1 @@
+puts gets.split.map{|a| a.to_i.digits.sum}.max

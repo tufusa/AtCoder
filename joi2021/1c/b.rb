@@ -1,0 +1,1 @@
+p 250+[((gets.to_i-gets.to_i)/gets.to_f).ceil*100,0].max

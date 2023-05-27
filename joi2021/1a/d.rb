@@ -1,0 +1,1 @@
+p gets.to_i-(gets.split-gets.split).size

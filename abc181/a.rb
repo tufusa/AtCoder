@@ -1,0 +1,1 @@
+puts gets.to_i.even? ? "White" : "Black"

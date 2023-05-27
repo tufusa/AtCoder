@@ -1,0 +1,1 @@
+puts (gets.split[0].to_i).times.flat_map{ gets.chomp.chars }.count("#")

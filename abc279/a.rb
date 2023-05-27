@@ -1,0 +1,1 @@
+puts gets.chomp.then{ _1.size + _1.count(?w) }

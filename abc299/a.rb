@@ -1,0 +1,1 @@
+puts [gets, gets][1].chomp =~ /.*\|.*\*.*\|.*/ ? 'in' : 'out'

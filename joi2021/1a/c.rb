@@ -1,0 +1,1 @@
+puts ([gets,gets][1].chars|[]).size>3?:Yes: :No

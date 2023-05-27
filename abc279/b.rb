@@ -1,0 +1,1 @@
+puts gets.chomp.include?(gets.chomp) ? 'Yes' : 'No'
