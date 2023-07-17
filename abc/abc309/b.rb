@@ -1,7 +1,7 @@
 require 'benchmark'
 $n = gets.to_i
 as = $n.times.map { gets.chomp.chars.map &:to_i }
-res = as.map { _1.dup }
+res = as.map &:dup
 
 def prev(x, y)
   if x == 0 && y != $n - 1
@@ -18,8 +18,8 @@ end
 now = [0, 0]
 while true
   prev = prev(*now)
-  res = as[prev[1]][prev[0]]
+  res[now[1]][now[0]] = as[prev[1]][prev[0]]
   now = prev
   break if now[0] == 0 && now[1] == 0
 end
-print res
+puts res.map &:join
