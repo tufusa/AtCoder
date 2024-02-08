@@ -2,8 +2,8 @@ n = gets.to_i
 sls = n.times.map { gets.split.map &:to_i }.to_h
 while true
   ch = false
-  keys = sls.keys
-  keys.each do |s|
+  ks = sls.ks
+  ks.each do |s|
     sl = sls[s]
     next if sl < 2
 
