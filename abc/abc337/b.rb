@@ -1,0 +1,1 @@
+puts ['ABC', 'AB', 'BC', 'AC', 'A', 'B', 'C', ''].include?(gets.chomp.gsub(/A+/, ?A).gsub(/B+/, ?B).gsub(/C+/, ?C)) ? 'Yes' : 'No'
