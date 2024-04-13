@@ -1,0 +1,1 @@
+puts gets.chomp.tap { _1[-1] = ?4 }
