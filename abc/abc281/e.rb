@@ -1,26 +1,46 @@
-require 'set'
-n, m, k = gets.split.map &:to_i#[2*10**5, 10**5+1,10**5]#
-a = gets.split.map &:to_i#Array.new(n){ rand(10**9) + 1 }#
-nums = SortedSet.new a[0...m]
-cnts = a[0...m].tally
-ans = [nums.flat_map{|v| [v] * cnts[v] }[0...k].sum]
-(1..(n-m)).each do |i|
-  cnts[a[i + m - 1]] ||= 0
-  cnts[a[i + m - 1]] += 1
-  nums.add a[i + m - 1]
-  cnts[a[i - 1]] -= 1
-  nums.delete a[i - 1] if cnts[a[i - 1]] == 0
-  count = 0
-  sum = 0
-  nums.each do |num|
-    count += cnts[num]
-    if count >= k
-      sum += num * (cnts[num] - (count - k))
-      break
-    else
-      sum += num * cnts[num]
-    end
+require 'rbtree'
+
+n, m, k = gets.split.map &:to_i
+as = gets.split.map &:to_i
+sm = RBTree[].tap { _1.default = 0 }
+lg = RBTree[].tap { _1.default = 0 }
+as[0...m].sort.each_with_index { |v, i| [sm, lg][i < k ? 0 : 1][v] += 1 }
+ans = [sm.map { _1 * _2 }.sum]
+smcnt = k
+sum = ans[-1]
+(0...(n - m)).each do |i|
+  rm = as[i]
+  mk = as[m + i]
+  if sm[rm] > 0
+    sm[rm] -= 1
+    smcnt -= 1
+    sum -= rm
+    sm.delete rm if sm[rm] == 0
+  else
+    lg[rm] -= 1
+    lg.delete rm if lg[rm] == 0
   end
+  if mk <= sm.last[0]
+    sm[mk] += 1
+    smcnt += 1
+    sum += mk
+  else
+    lg[mk] += 1
+  end
+  if smcnt == k - 1
+    mv = lg.first[0]
+    lg[mv] -= 1
+    sm[mv] += 1
+    sum += mv
+    lg.delete mv if lg[mv] == 0
+  elsif smcnt == k + 1
+    mv = sm.last[0]
+    sm[mv] -= 1
+    lg[mv] += 1
+    sum -= mv
+    sm.delete mv if sm[mv] == 0
+  end
+  smcnt = k
   ans << sum
 end
-puts ans.map(&:to_s).join ' '
+puts ans.join ?\s
